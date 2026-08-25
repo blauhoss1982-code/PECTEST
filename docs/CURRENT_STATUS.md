@@ -6,14 +6,17 @@ PECTEST is a disposable repository for validating production-style PEC Plannerâ†
 ## Current lifecycle state
 - Issue: #1 `PECTEST-001: two-checkpoint PEC collaboration validation`
 - Active task: `docs/tasks/active/PECTEST-001-pec-validation.md`
-- Planning baseline: `98ee79ca6e2263322dbe664b191b81309aa71013`
-- State after this planning change merges: `READY_FOR_EXECUTION_BINDING`
+- Task blob: `41b9636ee69985039536e7dab18b397d886df73c`
+- State: `EXECUTION_BOUND / CHECKPOINT_A_READY`
 
-## Next durable actions
-1. Planner merges the planning PR containing this authority and active task.
-2. Planner reads the merged task blob SHA from `main`.
-3. Planner creates a dedicated execution branch from the exact merged `main` SHA.
-4. Planner records Repository / Branch / Start / Task / Task-blob binding in Issue #1.
-5. Only then Planner sends PEC `CONTINUE` to start Checkpoint A.
+## Exact execution binding
+- Repository: `blauhoss1982-code/PECTEST`
+- Branch: `executor/PECTEST-001-pec-validation`
+- Start: `7be6765237d552f9aed0a6592ef53d5cfcd72874`
+- Task: `docs/tasks/active/PECTEST-001-pec-validation.md`
+- Task-blob: `41b9636ee69985039536e7dab18b397d886df73c`
 
-No Executor work is authorized before the exact binding exists.
+The same binding is recorded in Issue #1. Executor may act only through the bound branch and merged task. Checkpoint B is not authorized until Planner independently accepts Checkpoint A and sends PEC `CONTINUE`.
+
+## Next action
+Planner sends the current PEC handoff `CONTINUE` for Checkpoint A using only compact durable coordinates. After the Executor receipt, Planner independently reviews the remote PECTEST branch before any further disposition.
