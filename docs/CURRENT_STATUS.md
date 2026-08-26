@@ -14,7 +14,7 @@ PECTEST-008 is completed and archived. Its accepted execution and closeout are r
 - PECTEST Issue: `#47`
 - Planning baseline: `e82a43972572a9d552dc9412f3ffa52447f4d804`
 - Planning authority PR: `#48` (merged)
-- Binding PR: `#49`
+- Binding PR: `#49` (merged)
 - Execution Start: `491544d1b64424c77f2ae27e48bbff5a8e65b242`
 - Frozen Task-blob: `2b5a11c06b35739440d3b3589c108e3f7c3d1aa9`
 
@@ -26,12 +26,18 @@ PECTEST-008 is completed and archived. Its accepted execution and closeout are r
 - Task: `docs/tasks/active/PECTEST-009-pec-validation.md`
 - Task-blob: `2b5a11c06b35739440d3b3589c108e3f7c3d1aa9`
 
-The execution branch was created directly at the exact merged Start. Binding PR #49 records these coordinates without changing the frozen task or execution branch.
+## Planner binding verification
+
+After Binding PR #49 merged, Planner independently re-read the remote durable state and verified:
+
+- the active task blob on `main` is exactly `2b5a11c06b35739440d3b3589c108e3f7c3d1aa9`;
+- `executor/PECTEST-009-pec-validation` HEAD is exactly `491544d1b64424c77f2ae27e48bbff5a8e65b242`;
+- comparing the bound Start to the execution branch is `identical`, with ahead-by `0` and behind-by `0`.
 
 ## Checkpoint gate
 
-- After Binding PR #49 is merged and Planner independently re-verifies the exact binding, the initial PEC `CONTINUE` authorizes Checkpoint A only.
+- The initial PEC `CONTINUE` for this exact verified binding authorizes Checkpoint A only.
 - Checkpoint B is forbidden until Planner independently accepts remote Checkpoint A evidence and sends a later PEC `CONTINUE` for the same unchanged binding.
 - Executor PASS is evidence only; Planner acceptance requires independent remote review.
 
-State: PECTEST-009 active task is merged. Binding PR #49 is the Planner-owned durable binding change; Executor work remains unauthorized until that PR is merged and the remote binding is re-verified.
+State: PECTEST-009 planning authority and exact execution binding are durably established and independently verified. Checkpoint A is the next executable checkpoint, but it begins only when the initial PEC `CONTINUE` is delivered through the configured C1 register.
