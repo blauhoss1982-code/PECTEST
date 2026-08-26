@@ -4,14 +4,25 @@
 
 PECTEST GitHub is the durable project authority. PEC C1 is transport only.
 
-## Active validation
+## PECTEST-007 lifecycle
 
 - Task ID: `PECTEST-007`
 - PECTEST Issue: `#37`
 - Neutral planning baseline: `565fdea699b10def2914cac82a7e370585b6ad0c`
-- Planning branch: `planner/PECTEST-007-establish-authority`
-- Active task: `docs/tasks/active/PECTEST-007-pec-validation.md`
+- Planning authority PR: `#38` (merged)
+- Merged planning commit / execution Start: `11dd551c086c1a52a618a5ad4bb8cde1619336c8`
+- Frozen Task-blob: `1db5c1ae353ba76d4c32fcffa056096c40163c8a`
 
-State: planning authority and active validation contract are being established from the neutral README-only baseline. Execution is forbidden until the active task is merged to `main`, a dedicated execution branch is created at the merged Start, and Planner durably records the exact Repository / Branch / Start / Task / Task-blob binding.
+## Exact execution binding
 
-Checkpoint A is the only checkpoint that may be authorized by the initial PEC `CONTINUE`. Checkpoint B remains forbidden until independent Planner review accepts Checkpoint A and a later `CONTINUE` is sent for the unchanged binding.
+- Repository: `blauhoss1982-code/PECTEST`
+- Branch: `executor/PECTEST-007-pec-validation`
+- Start: `11dd551c086c1a52a618a5ad4bb8cde1619336c8`
+- Task: `docs/tasks/active/PECTEST-007-pec-validation.md`
+- Task-blob: `1db5c1ae353ba76d4c32fcffa056096c40163c8a`
+
+The execution branch was created exactly at Start after the active task was merged. This binding record does not modify the active task or the execution branch.
+
+State: exact execution binding established. Checkpoint A may be dispatched only after this binding record is merged to `main` and Planner independently rechecks the remote execution branch HEAD and frozen task blob.
+
+The initial PEC `CONTINUE` authorizes Checkpoint A only. Checkpoint B remains forbidden until Checkpoint A is independently reviewed and accepted by Planner and a later PEC `CONTINUE` is sent for this unchanged binding.
