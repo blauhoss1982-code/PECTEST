@@ -1,27 +1,26 @@
 # Current Status
 
 ## Project
-PECTEST is a disposable repository for validating production-style PEC Planner↔Executor collaboration while keeping PECTEST itself as the durable project authority.
+PECTEST validates the Planner↔Executor PEC workflow while PECTEST GitHub remains the durable project source of truth.
 
-## Current lifecycle state
+## Lifecycle
 - Issue: #1 `PECTEST-001: two-checkpoint PEC collaboration validation`
-- Active task: `docs/tasks/active/PECTEST-001-pec-validation.md`
+- Completed task: `docs/tasks/completed/PECTEST-001-pec-validation.md`
 - Task blob: `41b9636ee69985039536e7dab18b397d886df73c`
-- State: `EXECUTION_BOUND / CHECKPOINT_A_DISPATCHED`
+- State: `COMPLETED / NO_ACTIVE_EXECUTION`
 
-## Exact execution binding
-- Repository: `blauhoss1982-code/PECTEST`
+## Accepted execution
 - Branch: `executor/PECTEST-001-pec-validation`
-- Start: `7be6765237d552f9aed0a6592ef53d5cfcd72874`
-- Task: `docs/tasks/active/PECTEST-001-pec-validation.md`
-- Task-blob: `41b9636ee69985039536e7dab18b397d886df73c`
+- Bound Start: `7be6765237d552f9aed0a6592ef53d5cfcd72874`
+- Checkpoint A HEAD: `3983659f3b9713ba030cc7b685e88f0182a16f32`
+- Checkpoint B HEAD: `b13eeba22bd7c5d860eb9ccc57786ea0e5aca5bb`
+- Execution PR: #6
+- Execution merge: `a403bd3dea257e6795a6d5fba3b0f28f289a705a`
 
-The same binding is recorded in Issue #1. Executor may act only through the bound branch and merged task. Checkpoint B remains unauthorized until Planner independently accepts Checkpoint A and sends a later PEC `CONTINUE`.
+Planner independently verified the A parent/diff/content, the B parent/diff/final content, and the validation report before merging execution PR #6.
 
-## PEC transport dispatch — 2026-08-25
-The bootstrap transport gate is resolved by the fresh PEC footer received in the Planner handoff. Planner replaced C1 register Issue #388 exactly with request `initial-project-dac62055d4704dd380da7ade`, sequence `13`, disposition `CONTINUE`, authority `issues/387`.
+## Validation finding
+Checkpoint B was executed before the contractually required independent Planner acceptance of Checkpoint A. Planner later reconstructed and verified both checkpoints from remote Git history. The implementation is accepted, but this sequencing deviation is recorded as a validation finding.
 
-That mutation authorizes Checkpoint A only. The active task, Task blob, bound Start, and execution branch are unchanged.
-
-## Next action
-Wait for the Executor's compact Checkpoint A receipt. Then Planner independently reads the remote PECTEST execution branch, diff and exact `pec-validation.txt` bytes before deciding ACCEPT or REWORK. No Checkpoint B authorization exists yet.
+## Closeout
+The active task is moved unchanged to completed and there is no active execution task. After the closeout PR is merged, close Issue #1 as completed. Send PEC `TERMINAL` only after durable closeout and with the exact fresh transport identity.
