@@ -13,12 +13,25 @@ PECTEST-008 is completed and archived. Its accepted execution and closeout are r
 - Task ID: `PECTEST-009`
 - PECTEST Issue: `#47`
 - Planning baseline: `e82a43972572a9d552dc9412f3ffa52447f4d804`
-- Planning branch: `planner/PECTEST-009-authority`
-- Planning authority PR: `#48`
-- Active task path: `docs/tasks/active/PECTEST-009-pec-validation.md`
+- Planning authority PR: `#48` (merged)
+- Binding PR: `#49`
+- Execution Start: `491544d1b64424c77f2ae27e48bbff5a8e65b242`
+- Frozen Task-blob: `2b5a11c06b35739440d3b3589c108e3f7c3d1aa9`
 
-PR #48 establishes the versioned active task. Execution is not authorized by this planning record alone.
+## Exact execution binding
 
-After PR #48 is merged, Planner must use the exact merged `main` commit as execution Start, fetch the exact merged active-task blob SHA, create the dedicated execution branch at that Start, and durably record the exact Repository / Branch / Start / Task / Task-blob binding through a separate planning change before any PEC `CONTINUE` is sent.
+- Repository: `blauhoss1982-code/PECTEST`
+- Branch: `executor/PECTEST-009-pec-validation`
+- Start: `491544d1b64424c77f2ae27e48bbff5a8e65b242`
+- Task: `docs/tasks/active/PECTEST-009-pec-validation.md`
+- Task-blob: `2b5a11c06b35739440d3b3589c108e3f7c3d1aa9`
 
-State: PECTEST-009 is being established as the next validation task; no Executor checkpoint is authorized until the exact post-merge binding is recorded and independently re-verified.
+The execution branch was created directly at the exact merged Start. Binding PR #49 records these coordinates without changing the frozen task or execution branch.
+
+## Checkpoint gate
+
+- After Binding PR #49 is merged and Planner independently re-verifies the exact binding, the initial PEC `CONTINUE` authorizes Checkpoint A only.
+- Checkpoint B is forbidden until Planner independently accepts remote Checkpoint A evidence and sends a later PEC `CONTINUE` for the same unchanged binding.
+- Executor PASS is evidence only; Planner acceptance requires independent remote review.
+
+State: PECTEST-009 active task is merged. Binding PR #49 is the Planner-owned durable binding change; Executor work remains unauthorized until that PR is merged and the remote binding is re-verified.
