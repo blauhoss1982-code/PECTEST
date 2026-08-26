@@ -37,4 +37,12 @@ PECTEST GitHub is the durable project authority. PEC C1 is transport only.
 - Exact remote content: `PEC_VALIDATION_FIRST_OK\n`
 - Planner decision: `ACCEPT`
 
-State: Checkpoint A independently accepted by Planner. Checkpoint B remains forbidden until the post-acceptance PEC `CONTINUE` is successfully written for this same binding.
+## Checkpoint B dispatch
+
+- PEC register: `blauhoss1982-code/planner-executor-conductor#388` (C1 transport only)
+- Request ID: `reply-1a4cccda819149f3ae5fc2cf0adeda481f4995ab2bb4589745a77d4b0e12bcb2`
+- Sequence: `90`
+- Disposition: `CONTINUE`
+- Transport authority: `issues/387`
+
+State: Checkpoint A independently accepted and Checkpoint B dispatched on the same exact execution binding. Waiting for Executor Checkpoint B receipt and Planner independent review. No execution merge, closeout, Issue closure, or PEC TERMINAL is authorized until Checkpoint B passes the completion gate.
