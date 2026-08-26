@@ -4,36 +4,21 @@
 
 PECTEST GitHub is the durable project authority. PEC C1 is transport only.
 
-## PECTEST-008 lifecycle
+## Previous completed validation
 
-- Task ID: `PECTEST-008`
-- PECTEST Issue: `#41`
-- Neutral planning baseline: `833f98d5dafb160bdb0239768c4068acd407a896`
-- Planning authority PR: `#42` (merged)
-- Binding PR: `#43` (merged)
-- Binding confirmation PR: `#44` (merged)
-- Execution Start: `177f10fdc322ac703a439b65fdebdda23d7b75c2`
-- Frozen Task-blob: `6de7c1e3dda58df1597528e8ed0206a7f49dc0cc`
+PECTEST-008 is completed and archived. Its accepted execution and closeout are recorded in repository history and `docs/tasks/completed/PECTEST-008-pec-validation.md`.
 
-## Exact execution binding
+## PECTEST-009 planning lifecycle
 
-- Repository: `blauhoss1982-code/PECTEST`
-- Branch: `executor/PECTEST-008-pec-validation`
-- Start: `177f10fdc322ac703a439b65fdebdda23d7b75c2`
-- Task: `docs/tasks/active/PECTEST-008-pec-validation.md`
-- Task-blob: `6de7c1e3dda58df1597528e8ed0206a7f49dc0cc`
+- Task ID: `PECTEST-009`
+- PECTEST Issue: `#47`
+- Planning baseline: `e82a43972572a9d552dc9412f3ffa52447f4d804`
+- Planning branch: `planner/PECTEST-009-authority`
+- Planning authority PR: `#48`
+- Active task path: `docs/tasks/active/PECTEST-009-pec-validation.md`
 
-## Completion evidence
+PR #48 establishes the versioned active task. Execution is not authorized by this planning record alone.
 
-- Checkpoint A accepted by Planner after independent remote review.
-- Checkpoint A commit: `0c66d308f4765982fcab7bb690ff5d70334e7174`
-- Checkpoint B accepted by Planner after independent remote review.
-- Checkpoint B HEAD: `9f44dde1e3bff9e233b830c778696bdeac787ada`
-- Final `pec-validation.txt` bytes: `PEC_VALIDATION_FIRST_OK\nPEC_VALIDATION_SECOND_OK\n`
-- Required standard-library exact-byte test and validation report were reviewed and accepted.
-- Execution PR: `#45` (merged)
-- Execution merge commit: `0ebb9383be3f265c1f56275ac37fbd2e714541be`
-- Completed task archive: `docs/tasks/completed/PECTEST-008-pec-validation.md`
-- Archived task content is unchanged from frozen Task-blob `6de7c1e3dda58df1597528e8ed0206a7f49dc0cc`.
+After PR #48 is merged, Planner must use the exact merged `main` commit as execution Start, fetch the exact merged active-task blob SHA, create the dedicated execution branch at that Start, and durably record the exact Repository / Branch / Start / Task / Task-blob binding through a separate planning change before any PEC `CONTINUE` is sent.
 
-State: PECTEST-008 implementation is accepted and merged. This closeout removes the active task path, archives the task unchanged, and records completion. After this closeout PR is merged and PECTEST Issue #41 is closed, the durable lifecycle is complete and PEC must return `TERMINAL`; no further Executor turn is authorized.
+State: PECTEST-009 is being established as the next validation task; no Executor checkpoint is authorized until the exact post-merge binding is recorded and independently re-verified.
