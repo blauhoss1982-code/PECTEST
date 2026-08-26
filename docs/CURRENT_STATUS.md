@@ -7,7 +7,7 @@ PECTEST is a disposable repository for validating production-style PEC Plannerâ†
 - Issue: #1 `PECTEST-001: two-checkpoint PEC collaboration validation`
 - Active task: `docs/tasks/active/PECTEST-001-pec-validation.md`
 - Task blob: `41b9636ee69985039536e7dab18b397d886df73c`
-- State: `EXECUTION_BOUND / TRANSPORT_GATE_BLOCKED`
+- State: `EXECUTION_BOUND / CHECKPOINT_A_DISPATCHED`
 
 ## Exact execution binding
 - Repository: `blauhoss1982-code/PECTEST`
@@ -16,12 +16,12 @@ PECTEST is a disposable repository for validating production-style PEC Plannerâ†
 - Task: `docs/tasks/active/PECTEST-001-pec-validation.md`
 - Task-blob: `41b9636ee69985039536e7dab18b397d886df73c`
 
-The same binding is recorded in Issue #1. Executor may act only through the bound branch and merged task. Checkpoint B is not authorized until Planner independently accepts Checkpoint A and sends PEC `CONTINUE`.
+The same binding is recorded in Issue #1. Executor may act only through the bound branch and merged task. Checkpoint B remains unauthorized until Planner independently accepts Checkpoint A and sends a later PEC `CONTINUE`.
 
-## Transport gate â€” 2026-08-25
-The PECTEST planning authority and exact execution binding are complete, but the current Planner-bound initial delivery does not expose the PEC transport footer that the enclosing validation contract says must provide the exact fresh C1 handoff coordinates. The live C1 register is still the prior 2026-08-24 terminal handoff at sequence 29 and is stale for this run.
+## PEC transport dispatch â€” 2026-08-25
+The bootstrap transport gate is resolved by the fresh PEC footer received in the Planner handoff. Planner replaced C1 register Issue #388 exactly with request `initial-project-dac62055d4704dd380da7ade`, sequence `13`, disposition `CONTINUE`, authority `issues/387`.
 
-Planner has intentionally made no C1 mutation and has not started Executor. Reusing the stale register request or inventing a request id would violate exact correlation and invalidate the counted validation. This is a PEC transport/correlation gate, not a PECTEST task-contract defect; the active task and execution binding remain unchanged.
+That mutation authorizes Checkpoint A only. The active task, Task blob, bound Start, and execution branch are unchanged.
 
 ## Next action
-When the exact current handoff identity is mechanically available through the normal PEC path, Planner sends one compact `CONTINUE` for Checkpoint A using the durable binding above. After the Executor receipt, Planner independently reviews the remote PECTEST branch before any further disposition.
+Wait for the Executor's compact Checkpoint A receipt. Then Planner independently reads the remote PECTEST execution branch, diff and exact `pec-validation.txt` bytes before deciding ACCEPT or REWORK. No Checkpoint B authorization exists yet.
