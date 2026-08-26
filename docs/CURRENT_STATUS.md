@@ -23,7 +23,8 @@ PECTEST GitHub is the durable project authority. PEC C1 is transport only.
 - Completed task: `docs/tasks/completed/PECTEST-003-pec-validation.md`
 - Completed task blob: `17aace65f4811ecc70713ffef48e7eab901e2d2f` (unchanged from active task)
 - Closeout branch: `planner/PECTEST-003-closeout`
-- State: implementation independently accepted and merged; repository closeout is being completed on the dedicated closeout branch. Issue `#14` is closed only after the closeout PR merges.
+- Closeout PR: `#18`
+- State: implementation independently accepted and merged; dedicated repository closeout is represented by PR `#18`. Lifecycle Issue `#14` is closed only after that PR merges.
 
 ## Final validation invariant
 
