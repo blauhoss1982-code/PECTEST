@@ -9,9 +9,20 @@ PECTEST GitHub is the durable project authority. PEC C1 is transport only.
 - Task ID: `PECTEST-008`
 - PECTEST Issue: `#41`
 - Neutral planning baseline: `833f98d5dafb160bdb0239768c4068acd407a896`
-- Planning authority branch: `planner/PECTEST-008-establish-authority`
-- Active task candidate: `docs/tasks/active/PECTEST-008-pec-validation.md`
+- Planning authority PR: `#42` (merged)
+- Merged planning commit / execution Start: `177f10fdc322ac703a439b65fdebdda23d7b75c2`
+- Frozen Task-blob: `6de7c1e3dda58df1597528e8ed0206a7f49dc0cc`
 
-State: planning authority and executable active task are being established through a normal planning PR. Execution is forbidden until the active task is merged to `main`, the dedicated execution branch is created at the exact merged Start, and Planner durably records and independently verifies the exact Repository / Branch / Start / Task / Task-blob binding.
+## Exact execution binding
 
-The initial PEC `CONTINUE` may authorize Checkpoint A only after that binding is fully established. Checkpoint B remains forbidden until Planner independently reviews and accepts Checkpoint A and a later PEC `CONTINUE` is sent for the unchanged binding.
+- Repository: `blauhoss1982-code/PECTEST`
+- Branch: `executor/PECTEST-008-pec-validation`
+- Start: `177f10fdc322ac703a439b65fdebdda23d7b75c2`
+- Task: `docs/tasks/active/PECTEST-008-pec-validation.md`
+- Task-blob: `6de7c1e3dda58df1597528e8ed0206a7f49dc0cc`
+
+The execution branch was created exactly at Start after the active task was merged. This binding record does not modify the active task or the execution branch.
+
+State: exact execution binding established pending merge of this planning-only binding record. Checkpoint A may be dispatched only after this binding record is merged to `main` and Planner independently rechecks the remote execution branch HEAD and frozen task blob.
+
+The initial PEC `CONTINUE` authorizes Checkpoint A only. Checkpoint B remains forbidden until Checkpoint A is independently reviewed and accepted by Planner and a later PEC `CONTINUE` is sent for this unchanged binding.
