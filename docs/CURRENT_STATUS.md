@@ -11,7 +11,8 @@ PECTEST GitHub is the durable project authority. PEC C1 is transport only.
 - Neutral planning baseline: `833f98d5dafb160bdb0239768c4068acd407a896`
 - Planning authority PR: `#42` (merged)
 - Binding PR: `#43` (merged)
-- Merged planning commit / execution Start: `177f10fdc322ac703a439b65fdebdda23d7b75c2`
+- Binding confirmation PR: `#44` (merged)
+- Execution Start: `177f10fdc322ac703a439b65fdebdda23d7b75c2`
 - Frozen Task-blob: `6de7c1e3dda58df1597528e8ed0206a7f49dc0cc`
 
 ## Exact execution binding
@@ -22,8 +23,17 @@ PECTEST GitHub is the durable project authority. PEC C1 is transport only.
 - Task: `docs/tasks/active/PECTEST-008-pec-validation.md`
 - Task-blob: `6de7c1e3dda58df1597528e8ed0206a7f49dc0cc`
 
-The execution branch was created exactly at Start after the active task was merged. This binding record does not modify the active task or the execution branch.
+## Completion evidence
 
-State: exact execution binding is durably merged and independently rechecked. The remote execution branch is identical to Start and the merged active task still has the frozen Task-blob above. Checkpoint A may now be dispatched through the supplied PEC `CONTINUE`.
+- Checkpoint A accepted by Planner after independent remote review.
+- Checkpoint A commit: `0c66d308f4765982fcab7bb690ff5d70334e7174`
+- Checkpoint B accepted by Planner after independent remote review.
+- Checkpoint B HEAD: `9f44dde1e3bff9e233b830c778696bdeac787ada`
+- Final `pec-validation.txt` bytes: `PEC_VALIDATION_FIRST_OK\nPEC_VALIDATION_SECOND_OK\n`
+- Required standard-library exact-byte test and validation report were reviewed and accepted.
+- Execution PR: `#45` (merged)
+- Execution merge commit: `0ebb9383be3f265c1f56275ac37fbd2e714541be`
+- Completed task archive: `docs/tasks/completed/PECTEST-008-pec-validation.md`
+- Archived task content is unchanged from frozen Task-blob `6de7c1e3dda58df1597528e8ed0206a7f49dc0cc`.
 
-The initial PEC `CONTINUE` authorizes Checkpoint A only. Checkpoint B remains forbidden until Checkpoint A is independently reviewed and accepted by Planner and a later PEC `CONTINUE` is sent for this unchanged binding.
+State: PECTEST-008 implementation is accepted and merged. This closeout removes the active task path, archives the task unchanged, and records completion. After this closeout PR is merged and PECTEST Issue #41 is closed, the durable lifecycle is complete and PEC must return `TERMINAL`; no further Executor turn is authorized.
