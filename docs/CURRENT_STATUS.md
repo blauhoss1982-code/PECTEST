@@ -21,6 +21,12 @@ PECTEST GitHub is the durable project authority. PEC C1 is transport only.
 - Task: `docs/tasks/active/PECTEST-005-pec-validation.md`
 - Task-blob: `7c21a5c5818f7f55fe5258953d179b24da03e3ed`
 
-State: exact execution binding established; Checkpoint A has not yet been dispatched. Executor must execute only the merged Task-blob on the exact bound branch from Start.
+## Checkpoint A dispatch
 
-Checkpoint A is the first executable checkpoint. Checkpoint B is forbidden until Planner independently accepts Checkpoint A and sends a later PEC `CONTINUE` for this same exact binding.
+- PEC register: `blauhoss1982-code/planner-executor-conductor#388` (C1 transport only)
+- Request ID: `initial-project-8b8493ce1e88441bbfc1d349`
+- Sequence: `89`
+- Disposition: `CONTINUE`
+- Transport authority: `issues/387`
+
+State: Checkpoint A dispatched on the exact binding; waiting for Executor receipt and Planner independent review. Checkpoint B remains forbidden until Planner accepts Checkpoint A and sends a later PEC `CONTINUE` for this same binding.
