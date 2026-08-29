@@ -14,8 +14,8 @@ PECTEST-009 is accepted, closed out and archived. Its execution merge is `17f9f4
 
 - Tracking Issue: `#54`
 - Validation plan: `docs/e2e/PECTEST-E2E-001-autonomous-bidirectional-flow.md`
-- E1: `PECTEST-010` Executor-first counted workload — implementation ACCEPTED; closeout PR `#63` in review.
-- Next phase after durable E1 terminal state: fresh independent `P1 — Planner-first counted run`.
+- E1 inner task: `PECTEST-010` Executor-first counted workload — implementation ACCEPTED and repository closeout carried by PR `#63`.
+- Next phase after PECTEST Issue `#56` is closed: fresh independent `P1 — Planner-first counted run`.
 
 The outer local Codex is the Autonomous Validation Operator. The normal inner Planner/Executor lifecycle remains governed by PECTEST durable authority.
 
@@ -32,7 +32,7 @@ The outer local Codex is the Autonomous Validation Operator. The normal inner Pl
 - Frozen Task-blob: `518f645448b4ecdb43122d652e4c8edd1f07e784`
 - Repository: `blauhoss1982-code/PECTEST`
 - Branch: `executor/PECTEST-010-e1-executor-first`
-- Task: `docs/tasks/active/PECTEST-010-e1-executor-first.md`
+- Frozen task path before closeout: `docs/tasks/active/PECTEST-010-e1-executor-first.md`
 
 ## Accepted execution evidence
 
@@ -54,10 +54,10 @@ Planner disposition: `ACCEPT` after independent remote review.
 - Closeout branch: `planner/PECTEST-010-e1-closeout`.
 - Closeout PR: `#63`.
 - PR #63 moves the frozen task unchanged to `docs/tasks/completed/PECTEST-010-e1-executor-first.md`, removes the active task path, and records this accepted evidence.
-- The completed task blob must remain exactly `518f645448b4ecdb43122d652e4c8edd1f07e784`.
+- Completed task blob: exactly `518f645448b4ecdb43122d652e4c8edd1f07e784`, unchanged from the frozen Task-blob.
 
-## Current gate
+When this status is present on `main`, closeout PR #63 has merged and the repository-side PECTEST-010 lifecycle is complete: the accepted implementation is on `main`, the active task is removed, and the unchanged frozen task is archived under `docs/tasks/completed/`.
 
-`PECTEST-E2E-001 / E1 / PECTEST-010 CLOSEOUT IN REVIEW`.
+## E1 terminal gate
 
-After closeout PR #63 is merged, Planner must independently verify the completed blob, absence of the active task, and accepted implementation on `main`, then close PECTEST Issue #56. At that point PECTEST-010 is terminal and no additional Executor implementation turn is authorized. The outer validation operator may then proceed to a fresh independent P1 Planner-first counted run.
+After this closeout is on `main`, Planner must independently re-verify the completed blob and absence of the active task, then close PECTEST Issue #56. Once Issue #56 is closed, `PECTEST-010` / E1 is `TERMINAL`; no additional Executor implementation turn is authorized. The outer validation operator may then proceed to a fresh independent P1 Planner-first counted run.
