@@ -17,20 +17,26 @@ PECTEST-009 is accepted, closed out and archived. Its execution merge is `17f9f4
 - Current phase: `E1 — Executor-first counted run`
 - Later phase: `P1 — Planner-first counted run`
 
-This is an **outer validation project**, not an executable inner engineering task.
+The outer local Codex is the Autonomous Validation Operator. The normal inner Planner/Executor lifecycle remains governed by PECTEST durable authority.
 
-At the start of E1 there is intentionally **no merged active PECTEST task/binding for the counted workload**. The inner Executor must therefore inspect durable authority, avoid editing, and use the normal PEC handoff so Planner establishes an Issue, merged frozen active task and exact execution binding before implementation.
+## PECTEST-010 inner E1 lifecycle
 
-The outer local Codex acts as Autonomous Validation Operator and may drive the local PEC UI/browser/test environment, inspect mechanical evidence, and repair a mechanically proven PEC product defect in an isolated repair branch/worktree. It must not manually relay Planner/Executor semantic content to make a counted run pass.
+- Task ID: `PECTEST-010`
+- PECTEST Issue: `#56`
+- Outer validation Issue: `#54`
+- Planning baseline: `3a091ff7bb0e00a72495b04e2c04439b45600e9b`
+- Planning branch: `planner/PECTEST-010-e1-authority`
+- Active task path: `docs/tasks/active/PECTEST-010-e1-executor-first.md`
+- Counted target: root `e2e-executor-first.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_OK\n`, plus standard-library exact-byte unittest and short report.
 
-Counted E1 target artifact: root `e2e-executor-first.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_OK\n`, plus standard-library unittest and normal short report.
+This planning change establishes the frozen active task only. It does not authorize Executor edits by itself.
 
-After E1 reaches a terminal counted phase result, the operator proceeds automatically to a fresh independent P1 Planner-first run targeting root `e2e-planner-first.txt` with exact bytes `PECTEST_PLANNER_FIRST_E2E_OK\n`.
+After the planning PR is merged, Planner must use that exact merge commit as execution Start, fetch the exact merged active-task blob SHA, create `executor/PECTEST-010-e1-executor-first` at Start, and durably record the exact Repository / Branch / Start / Task / Task-blob binding through a separate planning PR before execution is valid.
 
-Possible-send / possible-Enter ambiguity is strict no-replay. Failed or inconclusive runs must be preserved as evidence and a fresh run used rather than fabricating downstream state.
+Possible-send / possible-Enter ambiguity remains strict no-replay. Executor PASS is evidence only; Planner owns independent review, execution merge, separate closeout/archive, Issue closure, and terminal disposition.
 
 ## Current gate
 
-`PECTEST-E2E-001 / E1 READY AFTER THIS VALIDATION-PLAN CHANGE IS MERGED`.
+`PECTEST-E2E-001 / E1 / PECTEST-010 PLANNING AUTHORITY IN REVIEW`.
 
-No inner Executor implementation is authorized by this status document itself. The counted inner lifecycle must create its own normal durable task authority.
+No Executor implementation is authorized until the exact post-merge binding is durably recorded and independently re-verified.
