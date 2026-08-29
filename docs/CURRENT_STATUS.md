@@ -13,12 +13,14 @@ PECTEST-009 is accepted, closed out and archived. Its execution merge is `17f9f4
 **PECTEST-E2E-001 — autonomous PEC bidirectional lifecycle validation**
 
 - Tracking Issue: `#54`
-- Validation plan: `docs/e2e/PECTEST-E2E-001-autonomous-bidirectional-flow.md`
+- Main validation plan: `docs/e2e/PECTEST-E2E-001-autonomous-bidirectional-flow.md`
+- Fresh rerun addendum: `docs/e2e/PECTEST-E2E-001-fresh-e1-rerun-1.md`
 - Preserved first counted E1 result: `FAIL_UNRESOLVED`.
 - Failed-run inner task: `PECTEST-010` / Issue `#56`, fully accepted and closed out as repository evidence.
-- Owning PEC defect: `planner-executor-conductor` Issue `#595`, now independently accepted, merged, separately closed out, and closed as completed.
-- **Current phase: fresh E1 Executor-first counted rerun from a clean boundary.**
-- P1 remains blocked until this fresh E1 reaches an explicit terminal counted result.
+- Owning PEC defect: `planner-executor-conductor` Issue `#595`, independently accepted, merged, separately closed out, and closed as completed.
+- Selected PEC SUT baseline for the new counted run: `c99ec983594d83aa7a7a51522df8874b15895271` or a later main that contains it without a new active engineering task.
+- **Current phase: fresh E1-R1 Executor-first counted rerun from a clean boundary.**
+- P1 remains blocked until E1-R1 reaches explicit TERMINAL.
 
 The outer local Codex is the Autonomous Validation Operator. The normal inner Planner/Executor lifecycle remains governed by fresh PECTEST durable authority created during the new run.
 
@@ -41,11 +43,11 @@ Ambiguous semantic replay: NO
 Outer result: FAIL_UNRESOLVED
 ```
 
-The failure was preserved because PEC continued valid `CONTINUE` no-op turns after the inner durable lifecycle was complete instead of allowing Planner to select explicit `TERMINAL`. Do not reuse or relabel this failed run as a passing counted run.
+That run created `e2e-executor-first.txt`, so the same artifact must **not** be reused for the fresh counted rerun. Reusing an already-satisfied workload could produce a legitimate no-op/TERMINAL and would not exercise the required authority→execution→review→closeout path.
 
 ## Accepted PEC repair boundary
 
-PEC Issue #595 repaired the Planner-facing terminal-choice contradiction. Independent Planner review accepted the implementation and completed the normal PEC lifecycle:
+PEC Issue #595 repaired the Planner-facing terminal-choice contradiction:
 
 ```text
 PEC Issue: #595 — closed/completed
@@ -55,26 +57,28 @@ Execution PR: #600
 Execution merge: 3daf1c5b92e43b42846fb76720bce84a61c8f801
 Closeout PR: #601
 Closeout merge: 77ceee3a7ea6ab69994147575b937e2fb86cbe8d
+Post-closeout PEC status baseline: c99ec983594d83aa7a7a51522df8874b15895271
 ```
 
 The repaired ordinary Planner footer exposes exact mutually exclusive `CONTINUE` and `TERMINAL` responses under the same mechanical identity while keeping Conductor content-blind and preserving the initial bootstrap's single-path CONTINUE authority flow.
 
-## Fresh E1 counted boundary
+## Fresh E1-R1 counted boundary
 
-The fresh rerun must not reuse the prior local project/run, prior E1 workspace, prior request/sequence, or prior inner task authority.
+The fresh rerun must not reuse the prior local Project/run, prior request/sequence, PECTEST-010 authority, or the already-existing original E1 artifact.
 
-At the start of fresh E1:
+At E1-R1 start:
 
-- PECTEST has no merged active workload task for the new run;
-- the operator uses the canonical Executor-first PEC entry point against a fresh project/run;
+- there is intentionally no merged active workload task for E1-R1;
+- use a new PEC Project/run and isolated runtime/worktree;
+- the counted artifact is root `e2e-executor-first-rerun-1.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_RERUN_1_OK\n`;
+- that artifact is absent at the authorization boundary;
 - the inner Executor must inspect PECTEST and fail closed without editing when no active task/exact binding exists;
-- Planner must then establish a brand-new normal PECTEST inner Issue, merged frozen task, execution branch/Start, and exact Repository/Branch/Start/Task/Task-blob binding;
-- the counted artifact remains root `e2e-executor-first.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_OK\n`, a stdlib exact-byte unittest, and a short report;
+- Planner must establish a brand-new normal PECTEST inner Issue, merged frozen task, execution branch/Start, and exact Repository/Branch/Start/Task/Task-blob binding;
 - after accepted execution, separate closeout, archive, and Issue closure, Planner must choose the exact `TERMINAL` response and there must be zero no-op Executor progression;
 - possible-send / possible-Enter ambiguity remains strict no-replay;
 - manual semantic relay/copy-paste is forbidden.
 
-If fresh E1 reaches a terminal counted result, proceed to a fresh independent P1 Planner-first run. If another product/harness defect appears, preserve bounded evidence and repair/plan the owning defect rather than salvaging the run.
+If E1-R1 reaches explicit TERMINAL, proceed automatically to fresh independent P1 Planner-first using the main plan. Before P1 starts, mechanically confirm `e2e-planner-first.txt` is still absent; if it is already present, do not run a no-op P1 and instead establish a fresh durable P1 addendum.
 
 ## Other accepted invariants
 
@@ -82,4 +86,4 @@ The historical failed E1 and ISSUE-578 evidence remain no-replay. PECTEST-010 re
 
 ## Next action
 
-The Autonomous Validation Operator launches the fresh E1 Executor-first counted run from a new clean PEC project/run. Planner must not pre-create the new inner active task; the first Executor turn is expected to detect the absence of durable authority and request Planner setup through PEC.
+The Autonomous Validation Operator launches fresh E1-R1 through the canonical Executor-first PEC entry point using `docs/e2e/PECTEST-E2E-001-fresh-e1-rerun-1.md`. Planner must not pre-create the new inner active task; the first Executor turn is expected to detect missing durable authority and request Planner setup through PEC.
