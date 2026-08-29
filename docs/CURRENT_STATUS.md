@@ -2,40 +2,35 @@
 
 ## Project authority
 
-PECTEST GitHub is the durable project authority. PEC C1 is transport only.
+PECTEST GitHub is the durable project authority. PEC transport/orchestration does not replace merged PECTEST task authority.
 
 ## Previous completed validation
 
-PECTEST-008 is completed and archived. Its accepted execution and closeout remain recorded in repository history and `docs/tasks/completed/PECTEST-008-pec-validation.md`.
+PECTEST-009 is accepted, closed out and archived. Its execution merge is `17f9f46bfe76358018c7266e910b1e398928bcb7`; its closeout merge is `ce96505dd26134b5bf95d5ec2eb4e9f5fb174374`; the completed frozen task blob remains `2b5a11c06b35739440d3b3589c108e3f7c3d1aa9`.
 
-## PECTEST-009 lifecycle
+## Current outer validation project
 
-- Task ID: `PECTEST-009`
-- PECTEST Issue: `#47`
-- Planning authority PR: `#48` (merged)
-- Binding PR: `#49` (merged)
-- Binding confirmation PR: `#50` (merged)
-- Checkpoint A acceptance PR: `#51` (merged)
-- Execution PR: `#52` (merged)
-- Execution merge commit: `17f9f46bfe76358018c7266e910b1e398928bcb7`
-- Repository: `blauhoss1982-code/PECTEST`
-- Branch: `executor/PECTEST-009-pec-validation`
-- Start: `491544d1b64424c77f2ae27e48bbff5a8e65b242`
-- Frozen Task-blob: `2b5a11c06b35739440d3b3589c108e3f7c3d1aa9`
+**PECTEST-E2E-001 — autonomous PEC bidirectional lifecycle validation**
 
-## Accepted execution evidence
+- Tracking Issue: `#54`
+- Validation plan: `docs/e2e/PECTEST-E2E-001-autonomous-bidirectional-flow.md`
+- Current phase: `E1 — Executor-first counted run`
+- Later phase: `P1 — Planner-first counted run`
 
-- Checkpoint A commit: `30d9fa4ce855f0807a156ff1a5157d3738c01665`
-- Checkpoint B commit / accepted execution HEAD: `47e3e525f1840b49dc8a9cdfffb52f49548d85f7`
-- Checkpoint B is a direct child of Checkpoint A.
-- Planner independently verified the final `pec-validation.txt` bytes are exactly `PEC_VALIDATION_FIRST_OK\nPEC_VALIDATION_SECOND_OK\n`.
-- Planner independently verified `tests/test_pec_validation.py` uses Python standard-library `unittest` and asserts the exact final bytes.
-- Planner independently re-ran the required unittest discovery and exact-byte verification against the remote file contents; both passed.
-- Validation report: `docs/reports/PECTEST-009-validation.md`.
-- No GitHub commit status checks were configured/reported for the Checkpoint B commit.
+This is an **outer validation project**, not an executable inner engineering task.
 
-## Closeout
+At the start of E1 there is intentionally **no merged active PECTEST task/binding for the counted workload**. The inner Executor must therefore inspect durable authority, avoid editing, and use the normal PEC handoff so Planner establishes an Issue, merged frozen active task and exact execution binding before implementation.
 
-This closeout archives the frozen task unchanged at `docs/tasks/completed/PECTEST-009-pec-validation.md`, removes `docs/tasks/active/PECTEST-009-pec-validation.md`, and records the accepted execution evidence above. The completed task blob must remain exactly `2b5a11c06b35739440d3b3589c108e3f7c3d1aa9`.
+The outer local Codex acts as Autonomous Validation Operator and may drive the local PEC UI/browser/test environment, inspect mechanical evidence, and repair a mechanically proven PEC product defect in an isolated repair branch/worktree. It must not manually relay Planner/Executor semantic content to make a counted run pass.
 
-State: PECTEST-009 implementation is accepted and merged. After this separate closeout PR is merged and PECTEST Issue #47 is closed, the durable lifecycle is complete and PEC must return `TERMINAL`; no further Executor turn is authorized.
+Counted E1 target artifact: root `e2e-executor-first.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_OK\n`, plus standard-library unittest and normal short report.
+
+After E1 reaches a terminal counted phase result, the operator proceeds automatically to a fresh independent P1 Planner-first run targeting root `e2e-planner-first.txt` with exact bytes `PECTEST_PLANNER_FIRST_E2E_OK\n`.
+
+Possible-send / possible-Enter ambiguity is strict no-replay. Failed or inconclusive runs must be preserved as evidence and a fresh run used rather than fabricating downstream state.
+
+## Current gate
+
+`PECTEST-E2E-001 / E1 READY AFTER THIS VALIDATION-PLAN CHANGE IS MERGED`.
+
+No inner Executor implementation is authorized by this status document itself. The counted inner lifecycle must create its own normal durable task authority.
