@@ -14,8 +14,8 @@ PECTEST-009 is accepted, closed out and archived. Its execution merge is `17f9f4
 
 - Tracking Issue: `#54`
 - Validation plan: `docs/e2e/PECTEST-E2E-001-autonomous-bidirectional-flow.md`
-- Current phase: `E1 — Executor-first counted run`
-- Later phase: `P1 — Planner-first counted run`
+- E1: `PECTEST-010` Executor-first counted workload — implementation ACCEPTED; closeout PR `#63` in review.
+- Next phase after durable E1 terminal state: fresh independent `P1 — Planner-first counted run`.
 
 The outer local Codex is the Autonomous Validation Operator. The normal inner Planner/Executor lifecycle remains governed by PECTEST durable authority.
 
@@ -27,24 +27,37 @@ The outer local Codex is the Autonomous Validation Operator. The normal inner Pl
 - Planning baseline: `3a091ff7bb0e00a72495b04e2c04439b45600e9b`
 - Planning authority PR: `#60` (merged)
 - Planning merge / execution Start: `a0fad6c373b7b2597864187d28b4ab022e488da7`
+- Binding PR: `#61` (merged)
+- Binding merge: `51534f8c6e03115df45ba65802d896f4e736d485`
 - Frozen Task-blob: `518f645448b4ecdb43122d652e4c8edd1f07e784`
-
-## Exact execution binding
-
 - Repository: `blauhoss1982-code/PECTEST`
 - Branch: `executor/PECTEST-010-e1-executor-first`
-- Start: `a0fad6c373b7b2597864187d28b4ab022e488da7`
 - Task: `docs/tasks/active/PECTEST-010-e1-executor-first.md`
-- Task-blob: `518f645448b4ecdb43122d652e4c8edd1f07e784`
 
-The execution branch was created directly at the exact Start. This binding change does not modify the frozen task or execution branch.
+## Accepted execution evidence
 
-Counted target: root `e2e-executor-first.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_OK\n`, plus standard-library exact-byte unittest and short report.
+Planner disposition: `ACCEPT` after independent remote review.
 
-Possible-send / possible-Enter ambiguity remains strict no-replay. Executor PASS is evidence only; Planner owns independent review, execution merge, separate closeout/archive, Issue closure, and terminal disposition.
+- Accepted execution HEAD: `d6f85ebf4c3d3fc8e27ff53f1a3de497a16e8dbc`
+- Branch ancestry: exactly one commit ahead of Start with Start as merge-base.
+- Diff scope: only `e2e-executor-first.txt`, `tests/test_e2e_executor_first.py`, and `docs/reports/PECTEST-010-e1-executor-first-validation.md`.
+- Final artifact bytes: exactly `b"PECTEST_EXECUTOR_FIRST_E2E_OK\n"`.
+- Test: Python standard-library `unittest` exact-byte assertion.
+- Report: `docs/reports/PECTEST-010-e1-executor-first-validation.md`.
+- Executor-reported unittest and standalone byte verification: PASS; remote content and binding evidence are consistent with those results.
+- GitHub remote evidence: no workflow runs and no commit-status contexts were configured/reported for the accepted HEAD.
+- Execution PR: `#62` (merged).
+- Execution merge: `9acfd9fb1bd292560d493853a57381fd77acfc6b`.
+
+## Separate closeout
+
+- Closeout branch: `planner/PECTEST-010-e1-closeout`.
+- Closeout PR: `#63`.
+- PR #63 moves the frozen task unchanged to `docs/tasks/completed/PECTEST-010-e1-executor-first.md`, removes the active task path, and records this accepted evidence.
+- The completed task blob must remain exactly `518f645448b4ecdb43122d652e4c8edd1f07e784`.
 
 ## Current gate
 
-`PECTEST-E2E-001 / E1 / PECTEST-010 BINDING IN REVIEW`.
+`PECTEST-E2E-001 / E1 / PECTEST-010 CLOSEOUT IN REVIEW`.
 
-After this binding PR is merged and Planner independently re-verifies the exact remote binding, PEC `CONTINUE` authorizes the bounded PECTEST-010 implementation. No other branch, task revision, or chat content is authority.
+After closeout PR #63 is merged, Planner must independently verify the completed blob, absence of the active task, and accepted implementation on `main`, then close PECTEST Issue #56. At that point PECTEST-010 is terminal and no additional Executor implementation turn is authorized. The outer validation operator may then proceed to a fresh independent P1 Planner-first counted run.
