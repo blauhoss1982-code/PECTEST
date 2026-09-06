@@ -86,13 +86,21 @@ If E1-R1 reaches explicit TERMINAL, proceed automatically to fresh independent P
 - PECTEST Issue: `#69`
 - Outer validation Issue: `#54`
 - Planning baseline: `af3553aaa2951331af6bd96759dfdae73c3fc89b`
-- Planning branch: `planner/PECTEST-011-e1-r1-authority`
-- Active task path: `docs/tasks/active/PECTEST-011-e1-r1-executor-first.md`
-- Counted target: root `e2e-executor-first-rerun-1.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_RERUN_1_OK\n`, plus standard-library exact-byte unittest and short report.
+- Planning authority PR: `#70` (merged)
+- Planning merge / execution Start: `ae659670f80bacff9c40f52cf8a8c14015d1e04c`
+- Frozen Task-blob: `e9694c6099b75d44e155f2546ff237f26a97a0eb`
 
-This planning change establishes the frozen active task only. It does not authorize Executor edits by itself.
+## Exact execution binding
 
-After the planning PR is merged, Planner must use that exact merge commit as execution Start, fetch the exact merged active-task blob SHA, create `executor/PECTEST-011-e1-r1-executor-first` at Start, and durably record the exact Repository / Branch / Start / Task / Task-blob binding through a separate planning PR before execution is valid.
+- Repository: `blauhoss1982-code/PECTEST`
+- Branch: `executor/PECTEST-011-e1-r1-executor-first`
+- Start: `ae659670f80bacff9c40f52cf8a8c14015d1e04c`
+- Task: `docs/tasks/active/PECTEST-011-e1-r1-executor-first.md`
+- Task-blob: `e9694c6099b75d44e155f2546ff237f26a97a0eb`
+
+The execution branch was created directly at the exact Start. This binding change does not modify the frozen task or execution branch.
+
+Counted target: root `e2e-executor-first-rerun-1.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_RERUN_1_OK\n`, plus standard-library exact-byte unittest and short report.
 
 Possible-send / possible-Enter ambiguity remains strict no-replay. Executor PASS is evidence only; Planner owns independent review, execution merge, separate closeout/archive, Issue closure, and terminal disposition.
 
@@ -102,6 +110,6 @@ The historical failed E1 and ISSUE-578 evidence remain no-replay. PECTEST-010 re
 
 ## Next action
 
-`PECTEST-E2E-001 / E1-R1 / PECTEST-011 PLANNING AUTHORITY IN REVIEW`.
+`PECTEST-E2E-001 / E1-R1 / PECTEST-011 BINDING IN REVIEW`.
 
-No Executor implementation is authorized until the exact post-merge binding is durably recorded and independently re-verified.
+After this binding PR is merged and Planner independently re-verifies the exact remote binding, PEC `CONTINUE` authorizes the bounded PECTEST-011 implementation. No other branch, task revision, or chat content is authority.
