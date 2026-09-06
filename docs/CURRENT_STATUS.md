@@ -19,10 +19,10 @@ PECTEST-009 is accepted, closed out and archived. Its execution merge is `17f9f4
 - Failed-run inner task: `PECTEST-010` / Issue `#56`, fully accepted and closed out as repository evidence.
 - Owning PEC defect: `planner-executor-conductor` Issue `#595`, independently accepted, merged, separately closed out, and closed as completed.
 - Selected PEC SUT baseline for the new counted run: `c99ec983594d83aa7a7a51522df8874b15895271` or a later main that contains it without a new active engineering task.
-- E1-R1 inner task: `PECTEST-011` fresh Executor-first counted workload — implementation `ACCEPT` and repository closeout carried by PR `#73`.
-- P1 remains blocked until PECTEST Issue `#69` is closed and E1-R1 reaches explicit PEC `TERMINAL`.
+- E1-R1 inner task: `PECTEST-011` fresh Executor-first counted workload — implementation `ACCEPT` and repository closeout carried by PR `#73`; Issue `#69` is closed and PEC C1 reached explicit `TERMINAL`.
+- P1 inner task: `PECTEST-012` / Issue `#75` — frozen task merged and exact execution binding in review.
 
-The outer local Codex is the Autonomous Validation Operator. The normal inner Planner/Executor lifecycle remains governed by fresh PECTEST durable authority created during the new run.
+The outer local Codex is the Autonomous Validation Operator. The normal inner Planner/Executor lifecycle remains governed by fresh PECTEST durable authority created during the run.
 
 ## Preserved failed E1 evidence
 
@@ -123,8 +123,36 @@ When this status is present on `main`, closeout PR #73 has merged and the reposi
 
 ## E1-R1 terminal gate
 
-After this closeout is on `main`, Planner must independently re-verify the completed blob and absence of the active task, then close PECTEST Issue #69. Once Issue #69 is closed, `PECTEST-011` / E1-R1 is `TERMINAL`; no additional Executor implementation turn is authorized. Planner must publish the exact same-request PEC `TERMINAL` response with zero post-closeout no-op Executor progression. The outer validation operator may then proceed to fresh independent P1 Planner-first.
+PECTEST Issue #69 is closed as completed and PEC C1 register reached explicit `TERMINAL`. No additional E1-R1 Executor implementation turn is authorized. P1 may proceed as a fresh independent Planner-first run.
+
+## PECTEST-012 inner P1 lifecycle
+
+- Task ID: `PECTEST-012`
+- PECTEST Issue: `#75`
+- Outer validation Issue: `#54`
+- Planning baseline: `e8d083b9062c5e6ba476282731de1c5ea3da41b4`
+- Planning authority PR: `#76` (merged)
+- Planning merge / execution Start: `b70a91f61e518929d63c4a2d11969344b50d88d5`
+- Frozen Task-blob: `a677df6f478fcb8f37e37f5086fc452b78b3dc92`
+
+## Exact P1 execution binding
+
+- Repository: `blauhoss1982-code/PECTEST`
+- Branch: `executor/PECTEST-012-p1-planner-first`
+- Start: `b70a91f61e518929d63c4a2d11969344b50d88d5`
+- Task: `docs/tasks/active/PECTEST-012-p1-planner-first.md`
+- Task-blob: `a677df6f478fcb8f37e37f5086fc452b78b3dc92`
+
+The execution branch was created directly at the exact Start. This binding change does not modify the frozen task or execution branch.
+
+Counted target: root `e2e-planner-first.txt` with exact bytes `PECTEST_PLANNER_FIRST_E2E_OK\n`, plus standard-library exact-byte unittest and short validation report.
+
+## Current P1 gate
+
+`PECTEST-E2E-001 / P1 / PECTEST-012 BINDING IN REVIEW`.
+
+After this binding planning change is merged and Planner independently re-verifies the exact remote binding, PEC C2 `CONTINUE` authorizes the bounded PECTEST-012 implementation. No other branch, task revision, old C1 authority, or chat-only content is execution authority.
 
 ## Other accepted invariants
 
-The historical failed E1 and ISSUE-578 evidence remain no-replay. PECTEST-010 remains completed and must not be reopened. No old PEC C1 handoff is authority for this fresh run.
+The historical failed E1 and ISSUE-578 evidence remain no-replay. PECTEST-010 and PECTEST-011 remain completed and must not be reopened. Old PEC C1 handoffs are not authority for P1. Possible-send / possible-Enter ambiguity remains strict no-replay, and manual semantic relay/copy-paste is forbidden.
