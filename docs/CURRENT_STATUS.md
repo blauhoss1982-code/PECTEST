@@ -80,10 +80,28 @@ At E1-R1 start:
 
 If E1-R1 reaches explicit TERMINAL, proceed automatically to fresh independent P1 Planner-first using the main plan. Before P1 starts, mechanically confirm `e2e-planner-first.txt` is still absent; if it is already present, do not run a no-op P1 and instead establish a fresh durable P1 addendum.
 
+## PECTEST-011 inner E1-R1 lifecycle
+
+- Task ID: `PECTEST-011`
+- PECTEST Issue: `#69`
+- Outer validation Issue: `#54`
+- Planning baseline: `af3553aaa2951331af6bd96759dfdae73c3fc89b`
+- Planning branch: `planner/PECTEST-011-e1-r1-authority`
+- Active task path: `docs/tasks/active/PECTEST-011-e1-r1-executor-first.md`
+- Counted target: root `e2e-executor-first-rerun-1.txt` with exact bytes `PECTEST_EXECUTOR_FIRST_E2E_RERUN_1_OK\n`, plus standard-library exact-byte unittest and short report.
+
+This planning change establishes the frozen active task only. It does not authorize Executor edits by itself.
+
+After the planning PR is merged, Planner must use that exact merge commit as execution Start, fetch the exact merged active-task blob SHA, create `executor/PECTEST-011-e1-r1-executor-first` at Start, and durably record the exact Repository / Branch / Start / Task / Task-blob binding through a separate planning PR before execution is valid.
+
+Possible-send / possible-Enter ambiguity remains strict no-replay. Executor PASS is evidence only; Planner owns independent review, execution merge, separate closeout/archive, Issue closure, and terminal disposition.
+
 ## Other accepted invariants
 
 The historical failed E1 and ISSUE-578 evidence remain no-replay. PECTEST-010 remains completed and must not be reopened. No old PEC C1 handoff is authority for this fresh run.
 
 ## Next action
 
-The Autonomous Validation Operator launches fresh E1-R1 through the canonical Executor-first PEC entry point using `docs/e2e/PECTEST-E2E-001-fresh-e1-rerun-1.md`. Planner must not pre-create the new inner active task; the first Executor turn is expected to detect missing durable authority and request Planner setup through PEC.
+`PECTEST-E2E-001 / E1-R1 / PECTEST-011 PLANNING AUTHORITY IN REVIEW`.
+
+No Executor implementation is authorized until the exact post-merge binding is durably recorded and independently re-verified.
