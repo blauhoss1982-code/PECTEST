@@ -12,6 +12,7 @@ PECTEST GitHub is the durable project authority. PEC transport/orchestration doe
 - Main validation plan: `docs/e2e/PECTEST-E2E-001-autonomous-bidirectional-flow.md`
 - Fresh E1 rerun addendum: `docs/e2e/PECTEST-E2E-001-fresh-e1-rerun-1.md`
 - Final counted PECTEST main before this outer closeout: `0e8974d289492a0db6dc68948f81827c2828ae83`
+- Outer closeout PR: `#80`
 - Manual semantic relay/copy-paste: `NO`
 - Ambiguous semantic replay: `NO`
 - Final classification: `PASS_REPAIRED`
